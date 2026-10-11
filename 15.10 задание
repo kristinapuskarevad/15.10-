@@ -1,0 +1,52 @@
+def my_len(arr: list[float | int]) -> int:
+    """Возвращает длину списка."""
+    count = 0                    # счётчик начинаем с нуля
+    for _ in arr:                # проходим по каждому элементу списка
+        count += 1               # каждый элемент увеличивает счётчик на 1
+    return count                 # возвращаем итоговое количество
+
+
+def my_sum(arr: list[float | int]) -> float | int:
+    """Возвращает сумму всех элементов списка."""
+    total = 0                    # нейтральный элемент для сложения — 0
+    for x in arr:                # перебираем элементы
+        total += x               # total = total + x
+    return total                 # возвращаем накопленную сумму
+
+
+def my_avg(arr: list[float | int]) -> float | int:
+    """Возвращает среднее арифметическое элементов списка."""
+    if my_len(arr) == 0:         # защита от деления на ноль
+        return 0                 # для пустого списка среднего не существует
+    return my_sum(arr) / my_len(arr)   # (сумма всех) / (количество)
+
+
+def my_min(arr: list[float | int]) -> float | int:
+    """Возвращает минимальный элемент списка."""
+    if my_len(arr) == 0:                          # у пустого списка нет минимума
+        raise ValueError("my_min() arg is an empty sequence")
+    smallest = arr[0]            # берём ПЕРВЫЙ элемент как начальный эталон
+    for x in arr:                # перебираем все элементы (включая нулевой — не страшно)
+        if x < smallest:         # если нашли меньше эталона...
+            smallest = x         # ...обновляем эталон
+    return smallest              # после цикла здесь гарантированно минимум
+
+
+def my_max(arr: list[float | int]) -> float | int:
+    """Возвращает максимальный элемент списка."""
+    if my_len(arr) == 0:                          # у пустого списка нет максимума
+        raise ValueError("my_max() arg is an empty sequence")
+    largest = arr[0]             # аналогично: первый элемент — эталон
+    for x in arr:
+        if x > largest:          # если элемент больше эталона...
+            largest = x          # ...запоминаем его
+    return largest
+
+
+def my_max_filter(arr: list[float | int], num: float | int) -> list[float | int]:
+    """Возвращает новый список из элементов arr, которые строго больше num."""
+    result = []                  # пустой список для результата
+    for x in arr:                # идём по исходному списку
+        if x > num:              # если элемент удовлетворяет условию...
+            result.append(x)     # ...добавляем его в результат
+    return result                # возвращаем новый список
